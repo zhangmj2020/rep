@@ -1,0 +1,14 @@
+if CKS_CKS6Q64
+	
+config SYS_SOC		
+	default "cks-cks6q64"
+
+choice 
+	prompt "CKS CKS6Q64 board select"
+
+config	TARGET_CKS6Q64_FPGA
+	bool "CKS CKS6Q64 FPGA board"
+
+endchoice
+
+endif

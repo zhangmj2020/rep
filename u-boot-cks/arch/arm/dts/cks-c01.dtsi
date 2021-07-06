@@ -1,0 +1,98 @@
+// SPDX-License-Identifier: GPL-2.0+
+/*
+ */
+#include <dt-bindings/interrupt-controller/irq.h>
+#include <dt-bindings/interrupt-controller/arm-gic.h>
+
+/ {
+	#address-cells = <1>;
+	#size-cells = <1>;
+	compatible = "cks,cks-01";
+
+	cpus {
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		cpu0: cpu@0 {
+			compatible = "arm,cortex-a9";
+			device_type = "cpu";
+			reg = <0>;
+		};
+
+		cpu1: cpu@1 {
+			compatible = "arm,cortex-a9";
+			device_type = "cpu";
+			reg = <1>;
+		};
+	};
+
+	amba: amba {
+		compatible = "simple-bus";
+		#address-cells = <1>;
+		#size-cells = <1>;
+		interrupt-parent = <&intc>;
+		ranges;
+
+		intc: interrupt-controller@05041000 {
+			compatible = "arm,cortex-a9-gic";
+			#interrupt-cells = <3>;
+			interrupt-controller;
+			reg = <0x05041000 0x1000>,
+			      <0x05040100 0x100>;
+		};
+
+		L2: cache-controller@05042000 {
+			compatible = "arm,pl310-cache";
+			reg = <0x05042000 0x1000>;
+			interrupts = <GIC_SPI 120 IRQ_TYPE_LEVEL_HIGH>;
+			arm,data-latency = <3 2 2>;
+			arm,tag-latency = <2 2 2>;
+			cache-unified;
+			cache-level = <2>;
+		};
+
+                uart0: serial@20000000 {
+                                compatible = "arm,pl011", "arm,primecell";
+                                reg = <0x20000000 0x1000>;
+                                interrupts = <GIC_SPI 0 IRQ_TYPE_LEVEL_HIGH>;
+//                                clocks = <&clks 45>, <&clks 26>;
+//                                clock-names = "uart", "apb_pclk";
+                                status = "disabled";
+                        };
+
+
+		sdhci0: mmc@10700100 {
+			compatible = "arasan,sdhci-8.9a";
+			status = "disabled";
+//			clock-names = "clk_xin", "clk_ahb";
+//			clocks = <&clkc 21>, <&clkc 32>;
+//			interrupt-parent = <&intc>;
+			interrupts = <0 25 4>;
+			reg = <0x10700100 0x1000>;
+		};
+
+		global_timer: timer@05040200 {
+			compatible = "arm,cortex-a9-global-timer";
+			reg = <0x05040200 0x20>;
+			interrupts = <GIC_PPI 11 0x304>;
+			interrupt-parent = <&intc>;
+//			clocks = <&clkc 4>;
+		};
+
+		scutimer: timer@05040600 {
+			interrupt-parent = <&intc>;
+			interrupts = <GIC_PPI 13 0x304>;
+			compatible = "arm,cortex-a9-twd-timer";
+			reg = <0x05040600 0x20>;
+//			clocks = <&clkc 4>;
+		};
+
+		timer0: timer0@14030000 {
+                        compatible = "snps,dw-apb-timer";
+                        interrupts = <GIC_SPI 8 4>;
+                        reg = <0x14030000 0x1000>;
+			status = "disabled";
+                };
+
+	};
+};

@@ -1,0 +1,14 @@
+if CKS_SMARTNIC
+	
+config SYS_SOC		
+	default "cks-smartnic"
+
+choice 
+	prompt "CKS smartnic board select"
+
+config	TARGET_FPGA_CKS_SMARTNIC
+	bool "CKS SMARTNIC FPGA board"
+
+endchoice
+
+endif

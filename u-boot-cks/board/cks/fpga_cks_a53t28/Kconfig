@@ -1,0 +1,12 @@
+if TARGET_FPGA_CKS_A53T28
+
+config SYS_BOARD
+	default "fpga_cks_a53t28"
+
+config SYS_VENDOR
+	default "cks"
+
+config SYS_CONFIG_NAME
+	default "fpga_cks_a53t28"
+
+endif

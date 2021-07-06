@@ -1,0 +1,65 @@
+// SPDX-License-Identifier: GPL-2.0+
+/*
+ */
+#include <dt-bindings/interrupt-controller/irq.h>
+#include <dt-bindings/interrupt-controller/arm-gic.h>
+
+/ {
+	#address-cells = <1>;
+	#size-cells = <1>;
+	compatible = "cks,cks-smartnic";
+
+    aliases {
+            spi0 = &qspi;         /* QSPI */
+    };
+
+	cpus {
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		cpu0: cpu@0 {
+			compatible = "arm,cortex-a53";
+			device_type = "cpu";
+			reg = <0>;
+		};
+	};
+
+	intc: interrupt-controller@10000000 {
+		compatible = "arm,gic-v3";
+		#interrupt-cells = <3>;
+		interrupt-controller;
+		reg = <0x10000000 0x1000>,
+		      <0x10040000 0x100>;
+	};
+
+    uart0: serial@22100000 {
+        compatible = "arm,pl011", "arm,primecell";
+        reg = <0x22100000 0x1000>;
+//                                interrupts = <GIC_SPI 87 IRQ_TYPE_LEVEL_HIGH>;
+//                                clocks = <&clks 45>, <&clks 26>;
+//                                clock-names = "uart", "apb_pclk";
+        status = "disabled";
+    };
+
+	timer0: timer0@22400000 {
+                    compatible = "snps,dw-apb-timer";
+                    interrupts = <GIC_SPI 82 4>;
+                    reg = <0x22400000 0x1000>;
+		status = "disabled";
+            };
+
+	qspi: qspi@22000000 {
+                compatible = "cdns,qspi-nor";
+                #address-cells = <1>;
+                #size-cells = <0>;
+                reg = <0x22000000 0x100>,
+                        <0x00000000 0x8000000>;
+                
+                cdns,fifo-depth = <256>;
+                cdns,fifo-width = <4>;
+                cdns,trigger-address = <0x00000000>;
+                status = "okay";
+               
+            };
+
+};

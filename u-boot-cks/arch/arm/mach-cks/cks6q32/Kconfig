@@ -1,0 +1,15 @@
+if CKS_CKS6Q32
+
+config SYS_SOC
+	default "cks-cks6q32"
+
+choice 
+	prompt "CKS CKS6Q32 board select"
+
+config	TARGET_CKS6Q32_FPGA
+	bool "CKS CKS6Q32 FPGA board"
+	select CPU_V7A
+	select SUPPORT_SPL
+endchoice
+
+endif

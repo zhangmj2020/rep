@@ -1,0 +1,14 @@
+if CKS_A53T28
+	
+config SYS_SOC		
+	default "cks-a53t28"
+
+choice 
+	prompt "CKS A53T28 board select"
+
+config	TARGET_FPGA_CKS_A53T28
+	bool "CKS A53T28 FPGA board"
+
+endchoice
+
+endif

@@ -1,0 +1,12 @@
+if TARGET_CKS6Q32_FPGA
+
+config SYS_BOARD
+	default "cks6q32_fpga"
+
+config SYS_VENDOR
+	default "cks"
+
+config SYS_CONFIG_NAME
+	default "cks6q32_fpga"
+
+endif

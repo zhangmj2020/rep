@@ -1,0 +1,50 @@
+// SPDX-License-Identifier: GPL-2.0+
+/*
+ *  Copyright (C) 2011 - 2015 Xilinx
+ *  Copyright (C) 2012 National Instruments Corp.
+ */
+/dts-v1/;
+#include "cks-smartnic.dtsi"
+/ {
+	model = "CKS SMARTNIC FPGA board";
+	compatible = "cks,cks-smartnic";
+};
+
+&qspi {
+		spi-max-frequency = <40000000>;
+		clocks = <3750000>;
+        flash0: gd25q127c@0 {
+                        #address-cells = <1>;
+                        #size-cells = <1>;
+                        compatible = "gigadevice,gd25q127c","jedec,spi-nor";
+                        spi-tx-bus-width = <4>;
+                		spi-rx-bus-width = <4>;
+                        reg = <0>;              /* chip select */
+                        spi-max-frequency = <10000000>;
+                        page-size = <256>;
+                        block-size = <16>;      /* 2^16, 64KB */
+                        cdns,tshsl-ns = <50>;
+                        cdns,tsd2d-ns = <50>;
+                        cdns,tchsh-ns = <4>;
+                        cdns,tslch-ns = <4>;
+                        spi-cpol = <1>;
+                        spi-cpha = <1>;
+                };
+		 /*flash0: s25f512s@0 {
+                        #address-cells = <1>;
+                        #size-cells = <1>;
+                        compatible = "spansion,s25fl512s","jedec,spi-nor";
+                        spi-tx-bus-width = <4>;
+                		spi-rx-bus-width = <4>;
+                        reg = <0>;              
+                        spi-max-frequency = <10000000>;
+                        page-size = <256>;
+                        block-size = <18>;     
+                        cdns,tshsl-ns = <50>;
+                        cdns,tsd2d-ns = <50>;
+                        cdns,tchsh-ns = <4>;
+                        cdns,tslch-ns = <4>;
+                        spi-cpol = <1>;
+                        spi-cpha = <1>;
+                };*/
+};

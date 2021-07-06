@@ -1,0 +1,12 @@
+if TARGET_FPGA_CKS_SMARTNIC
+
+config SYS_BOARD
+	default "fpga_cks_smartnic"
+
+config SYS_VENDOR
+	default "cks"
+
+config SYS_CONFIG_NAME
+	default "fpga_cks_smartnic"
+
+endif

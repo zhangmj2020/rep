@@ -1,0 +1,38 @@
+if ARCH_CKS
+
+config CKS_A53T28
+	bool "Support CKS A53T28"
+	select ARM64
+	select SUPPORT_SPL
+	select SPL
+	help
+	  The CKS_A53T28 cpu.
+
+config CKS_SMARTNIC
+	bool "Support CKS SMARTNIC"
+	select ARM64
+	help
+	  The CKS_SMARTNIC cpu.
+
+config CKS_CKS6Q64
+	bool "Support CKS CKS6Q64"
+	select ARM64
+	help
+	  The CKS6Q64 cpu.
+
+config CKS_CKS6Q32
+	bool "Support CKS CKS6Q32"
+	help
+	  The CKS6Q32 cpu.
+
+endif
+
+source "arch/arm/mach-cks/a53t28/Kconfig"
+source "board/cks/fpga_cks_a53t28/Kconfig"
+source "arch/arm/mach-cks/smartnic/Kconfig"
+source "board/cks/fpga_cks_smartnic/Kconfig"
+source "arch/arm/mach-cks/cks6q64/Kconfig"
+source "board/cks/cks6q64_fpga/Kconfig"
+
+source "arch/arm/mach-cks/cks6q32/Kconfig"
+source "board/cks/cks6q32_fpga/Kconfig"
